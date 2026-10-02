@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "hjanuschka.standby",
+  "name": "Standby",
+  "version": "0.2.0",
+  "author": "Helmut Januschka",
+  "license": "MIT",
+  "description": "Click to suspend the machine (screen off, fans off) with a Yes/No confirm. Fast comeback on any keypress.",
+  "kinds": [
+    "overlay",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "overlay": "Standby.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Standby",
+    "description": "Suspend to RAM: screen off, fans off, fast wake on keyboard",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}

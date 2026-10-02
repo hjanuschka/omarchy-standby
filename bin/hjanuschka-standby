@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# hjanuschka-standby: suspend the machine to RAM.
+#
+# Suspend-to-RAM turns off the display and spins the fans down; any
+# keypress wakes the machine back up quickly. Scheduled via the user
+# systemd manager so closing the caller's scope cannot cancel it.
+
+set -euo pipefail
+
+case "${1:-suspend}" in
+  suspend)
+    systemd-run --user --collect --quiet --on-active="1s" \
+      --timer-property=AccuracySec=100ms \
+      systemctl suspend --no-wall || exit 1
+    command -v omarchy-osd >/dev/null 2>&1 &&
+      omarchy-osd -i moon -m "Standing by" -d 2000 || true
+    ;;
+  *)
+    echo "usage: hjanuschka-standby {suspend}" >&2
+    exit 1
+    ;;
+esac
